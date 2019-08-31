@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import useStyles from "./styles";
+import React from "react";
+
+import clsx from "clsx";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import {
+  CssBaseline,
   AppBar,
   Toolbar,
   IconButton,
@@ -10,18 +12,35 @@ import {
   Badge
 } from "@material-ui/core";
 
-export default function Header() {
+import useStyles from "./styles";
+import Sidebar from "../Sidebar/index";
+
+export default function Header({ sidebarItems }) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  function handleDrawerOpen() {
+    setOpen(true);
+  }
+
+  function handleDrawerClose() {
+    setOpen(false);
+  }
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, { [classes.appBarShift]: open })}
+      >
         <Toolbar>
           <IconButton
             edge="start"
-            className={classes.menuButton}
+            className={clsx(classes.menuButton, open && classes.hide)}
             color="inherit"
             aria-label="open drawer"
+            onClick={handleDrawerOpen}
           >
             <MenuIcon />
           </IconButton>
@@ -38,6 +57,17 @@ export default function Header() {
           </div>
         </Toolbar>
       </AppBar>
+
+      <Sidebar open={open} onClick={handleDrawerClose} items={sidebarItems} />
+
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open
+        })}
+      >
+        <div className={classes.drawerHeader} />
+        <Typography variant="h5">oiiiii</Typography>
+      </main>
     </div>
   );
 }
