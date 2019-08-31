@@ -13,7 +13,8 @@ import {
 } from "@material-ui/core";
 
 import useStyles from "./styles";
-import Sidebar from "../Sidebar/index";
+import Sidebar from "../Sidebar";
+import Main from "../Main";
 
 export default function Header({ sidebarItems }) {
   const classes = useStyles();
@@ -59,15 +60,7 @@ export default function Header({ sidebarItems }) {
       </AppBar>
 
       <Sidebar open={open} onClick={handleDrawerClose} items={sidebarItems} />
-
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open
-        })}
-      >
-        <div className={classes.drawerHeader} />
-        <Typography variant="h5">oiiiii</Typography>
-      </main>
+      <Main open={open} />
     </div>
   );
 }
