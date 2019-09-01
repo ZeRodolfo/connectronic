@@ -16,9 +16,10 @@ import useStyles from "./styles";
 import Sidebar from "../Sidebar";
 import Main from "../Main";
 
-export default function Header({ sidebarItems }) {
+export default function Header(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const { sidebarItems } = props;
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -60,7 +61,7 @@ export default function Header({ sidebarItems }) {
       </AppBar>
 
       <Sidebar open={open} onClick={handleDrawerClose} items={sidebarItems} />
-      <Main open={open} />
+      <Main open={open}>{props.children}</Main>
     </div>
   );
 }

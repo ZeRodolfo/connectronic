@@ -1,12 +1,12 @@
 import React from "react";
 
 import clsx from "clsx";
-import { Typography } from "@material-ui/core";
 
 import useStyles from "./styles";
 
-export default function Main({ open }) {
+export default function Main(props) {
   const classes = useStyles();
+  const { open } = props;
 
   return (
     <main
@@ -15,7 +15,7 @@ export default function Main({ open }) {
       })}
     >
       <div className={classes.drawerHeader} />
-      <Typography variant="h5">oiiiii</Typography>
+      <div>{props.children}</div>
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 import { useTheme } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -21,7 +22,7 @@ export default function Sidebar(props) {
   const { open, onClick, items } = props;
 
   const list = items.map(item => (
-    <ListItem button key={item.name}>
+    <ListItem key={item.name} button component={Link} to={item.route}>
       <ListItemIcon>{item.icon}</ListItemIcon>
       <ListItemText primary={item.name} />
     </ListItem>
