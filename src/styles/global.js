@@ -14,5 +14,12 @@ export const theme = createMuiTheme({
       dark: "#ba000d",
       contrastText: "#000"
     }
+  },
+  overrides: {
+    MuiButton: {
+      text: {
+        fontWeight: "400"
+      }
+    }
   }
 });

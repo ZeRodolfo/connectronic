@@ -22,12 +22,12 @@ import {
   LinkIcon
 } from "./styles";
 import { Button } from "../../styles/components";
-
+import { DeleteItemDialog } from "../../components/DeleteItemDialog";
 import api from "../../services/api";
 
 export default class Category extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       columns: [
@@ -42,15 +42,26 @@ export default class Category extends Component {
               <LinkIcon to={`/categories/${rowData._id}`}>
                 <Edit />
               </LinkIcon>
-              <LinkIcon to={`/categories/${rowData._id}`}>
+              <LinkIcon
+                to="/"
+                onClick={e =>
+                  this.handleDialogOpen(e, `/categories/${rowData._id}`)
+                }
+              >
                 <Delete />
               </LinkIcon>
             </ContentIcon>
           )
         }
       ],
-      data: []
+      data: [],
+      openDialog: false,
+      destroyItem: null
     };
+
+    this.handleDestroyItem = this.handleDestroyItem.bind(this);
+    this.handleDialogOpen = this.handleDialogOpen.bind(this);
+    this.handleDialogClose = this.handleDialogClose.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +78,29 @@ export default class Category extends Component {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  handleDestroyItem() {
+    const { destroyItem } = this.state;
+    api
+      .delete(destroyItem)
+      .then(resp => {
+        this.setState({ openDialog: false, destroyItem: "" });
+        this.getData();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  handleDialogOpen(e, link) {
+    e.preventDefault();
+
+    this.setState({ openDialog: true, destroyItem: link });
+  }
+
+  handleDialogClose() {
+    this.setState({ openDialog: false, destroyItem: "" });
   }
 
   render() {
@@ -104,6 +138,13 @@ export default class Category extends Component {
                 data={this.state.data}
                 icons={tableIcons}
               />
+
+              {this.state.openDialog && (
+                <DeleteItemDialog
+                  handleDestroyItem={this.handleDestroyItem}
+                  handleDialogClose={this.handleDialogClose}
+                />
+              )}
             </Grid>
           </Paper>
         </Grid>
