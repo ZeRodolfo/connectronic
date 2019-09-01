@@ -7,6 +7,10 @@ import ListIcon from "@material-ui/icons/List";
 import Header from "./components/Header/index";
 import Routes from "./routes";
 
+import { MuiThemeProvider } from "@material-ui/core/styles";
+
+import { theme } from "./styles/global";
+
 function App() {
   const sidebarItems = [
     {
@@ -23,9 +27,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header sidebarItems={sidebarItems}>
-        <Routes />
-      </Header>
+      <MuiThemeProvider theme={theme}>
+        <Header sidebarItems={sidebarItems}>
+          <Routes />
+        </Header>
+      </MuiThemeProvider>
     </BrowserRouter>
   );
 }
