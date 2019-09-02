@@ -21,7 +21,7 @@ import {
   ContentIcon,
   LinkIcon
 } from "./styles";
-import { Button } from "../../styles/components";
+import { LinkButton } from "../../styles/components";
 import { DeleteItemDialog } from "../../components/DeleteItemDialog";
 import api from "../../services/api";
 
@@ -127,9 +127,9 @@ export default class Category extends Component {
         <Grid item xs={12}>
           <Paper>
             <ContentButton item xs={12}>
-              <Button>
+              <LinkButton to={`/categories/new`}>
                 <LabelButton>Adicionar</LabelButton> <Add />
-              </Button>
+              </LinkButton>
             </ContentButton>
             <Grid item xs={12}>
               <MaterialTable
