@@ -14,7 +14,7 @@ export const Button = styled(CoreButton)(({ theme }) => ({
 
 export const LinkButton = styled(Link)(({ theme }) => ({
   fontWeight: "400",
-  padding: `${theme.spacing(0.5)}px ${theme.spacing(2)}px`,
+  padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
   textAlign: "justify",
   color: theme.palette.primary.light,
   border: "1px solid",

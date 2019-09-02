@@ -124,14 +124,14 @@ export default class Category extends Component {
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={12}>
+        <Grid item md={12} xs={12}>
           <Paper>
             <ContentButton item xs={12}>
               <LinkButton to={`/categories/new`}>
                 <LabelButton>Adicionar</LabelButton> <Add />
               </LinkButton>
             </ContentButton>
-            <Grid item xs={12}>
+            <Grid item md={12} xs={12}>
               <MaterialTable
                 title="Categorias"
                 columns={this.state.columns}
