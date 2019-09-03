@@ -11,7 +11,7 @@ const Routes = () => (
     <Route exact path="/" component={Dashboard} />
     <Route exact path="/categories" component={Category} />
     <Route exact path="/categories/new" component={RegisterCategory} />
-    <Route exact path="/categories/:id" component={RegisterCategory} />
+    <Route path="/categories/:id" component={RegisterCategory} />
   </Switch>
 );
 
