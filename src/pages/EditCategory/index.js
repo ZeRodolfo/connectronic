@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Grid, AppBar, Tabs, Tab } from "@material-ui/core";
 import Category from "../../components/Category";
 import TabPanel from "../../components/TabPanel";
@@ -10,27 +11,33 @@ export default class EditCategory extends Component {
     this.state = {
       value: "information",
       isNotify: false,
-      notifyType: "warning",
-      notifyMessage: "",
-      nameValid: false,
-      descriptionValid: false,
-    }; 
+      notifyType: "warning"
+    };
 
     this.handleChangeTab = this.handleChangeTab.bind(this);
   }
+
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string
+      })
+    }).isRequired,
+    // history
+  };
 
   componentDidMount() {
     const { id } = this.props.match.params;
     this.setState(prevState => ({
       category: {
         ...prevState.category,
-          _id: id
+        _id: id
       }
     }));
   }
 
   handleChangeTab(event, value) {
-    this.setState({value});
+    this.setState({ value });
   }
 
   tabProps(index) {

@@ -39,11 +39,12 @@ export default class Category extends Component {
 
   static propTypes = {
     match: PropTypes.shape({
-        params: PropTypes.shape({
-            id: PropTypes.string
-        })
-    }).isRequired
-    };
+      params: PropTypes.shape({
+        id: PropTypes.string
+      })
+    }).isRequired,
+    // history
+  };
 
   componentDidMount() {
     this.getData();
@@ -62,7 +63,7 @@ export default class Category extends Component {
             name,
             description
           };
-          console.log(category)
+
           this.setState({ category });
         })
         .catch(error => {
@@ -100,18 +101,18 @@ export default class Category extends Component {
     event.preventDefault();
 
     const validForm = this.validateFields();
-    if (validForm) 
-      return ;
+    if (validForm)
+      return;
 
     const { category } = this.state;
     const { id } = this.props.match.params;
-    
+
     if (id !== undefined) {
       await api
         .put(`/categories/${id}`, category)
         .then(resp => {
           const { data } = resp;
-          console.log('put', data)
+
           this.setState({ category: data, isNotify: true, notifyType: "success", notifyMessage: "Categoria atualizada com sucesso." });
         })
         .catch(error => {
@@ -119,14 +120,12 @@ export default class Category extends Component {
           this.setState({ isNotify: true, notifyType: "error", notifyMessage: "Erro ao atualizar Categoria." });
         });
     }
-    console.log('id', id)
+
     if (id === undefined) {
-        console.log('post c', category);
       await api
         .post("/categories", category)
         .then(resp => {
           const { data } = resp;
-            console.log('post', data)
           this.setState({ category: data, isNotify: true, notifyType: "success", notifyMessage: "Categoria criada com sucesso." });
           this.props.history.push('/categories');
         })
@@ -161,7 +160,7 @@ export default class Category extends Component {
         />
       </Snackbar>
     )
-    
+
     return (
       <Grid container>
         {notification}
@@ -219,7 +218,7 @@ export default class Category extends Component {
               justify="flex-end"
               direction="row"
             >
-              <Button type="submit">{category._id !== null ? 'Editar' : 'Adicionar' }</Button>
+              <Button type="submit">{category._id !== null ? 'Editar' : 'Adicionar'}</Button>
             </ContentField>
           </Row>
         </ContainerForm>

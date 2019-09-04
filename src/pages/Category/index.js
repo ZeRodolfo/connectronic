@@ -68,8 +68,8 @@ export default class Category extends Component {
     this.getData();
   }
 
-  getData() {
-    api
+  async getData() {
+    await api
       .get(`/categories`)
       .then(resp => {
         const { data } = resp;
